@@ -1,779 +1,619 @@
-AI RPG-Arena:
-Social Story Puzzles & 'Pointless' Cookbook/Logistics Puzzles
-for Teaching, Training and Evaluation
+#### story_rpg_platform
 
-A testing/training framework set, including a Tabletop-like 
-Mini-RPG for people or for AI-Bots. 
-
-2024.05-06.22, 2026.04.21 G.G.Ashbrook
-
-
-
-As a continuation of our discussion of making tests to better understand how things work, from "Let's Test Models", "Ants vs. AI" and "The Jellyfish Spidercrab," et al, and as part of the larger discussion of how to create and use tests and metrics in "Stem Net Benchmarks", let's now look at two groups of puzzles that we can automatically generate to evaluate or to train people or machines.
-
-This study is part of a layered puzzle of stories, skills, and learning and layers of stories about puzzles, skills and learning. How do we, how can we, and how should we, design and implement environments for learning? 
-
-## Contents:
-
-1. Introduction
-2. Functionality
-3. Social Story Puzzles & 'Pointless' Logistics Puzzles
-4. Training & Testing
-5. Projects
-6. Future Research
-7. Links & References
-
-Appendix 1: Discussion
-Appendix 2: The Game Rules, Sample Starting Instructions
-Appendix 3: Sample Bot-Shared Memos
-
-
-# Introduction
-
-How is a marketplace like, and how unlike, a dungeon for adventurers? In real-world stories where people need to learn skills, how are those 'learning environments' shaped and managed? Can and should games and puzzles be used to teach real world skills? In machine learning where testing and training data are often needed in large quantities (both to create a machine for a task and to evaluate how good that machine is at a task), can skills and concepts be supported by enough data describing both tasks and errors? 
-
-### Code Git Repo:
-- https://github.com/stemnetbenchmarks/social_story_and_cookbook_puzzles 
-
-### Live Notebooks in Colab:
-- https://drive.google.com/drive/folders/1ETOeXGSF52_lkclJ7W_xSJNEZC0OEMz_ 
-
-
-#### Dungeon Crawling (in summary)
-There are two main ways to play through the Mini-RPG game.
-
-1. You can play manually yourself (or with a team), iterating through each round of play entering in the turns that each player will take in the next round (much like a table-top RPG where players might state their actions before the Dungeon-Master/Game-Master calculates the effects of all the players and non-players taking their actions. You can do this using a python-notebook (or in cli), which does not require anything aside from a computer with python installed (linux, bsd, MacOS should be fine (ms-windows...should work as well as windows ever works), or a google-colab notebook will run on any online device with a current browser (even a phone or tablet), (and you need a google-account to run colab). I recommend that you play the game through at least once this way to get a hands-on understanding of how the dungeon rules work and the nuances of what individual AI-Bots need to figure out together.
-
-2. You can run the AI-Bot-Arena (for which you will need a model-api (currently set up to use api from Mistral, Anthropic, or Google)):
-- Option A. Play using a notebook (or cli), and you can view the results as an RPG-Screenplay HTML file, seeing what the GM/DM each player says and chooses (for each iteration of planning and each round of actions taken).
-- Option B. View the game in real-time (or afterwards) as a (minimalist) Visual-Novel, using the code in /rpg_visual_novel_ui). See: https://github.com/lineality/rpg_visual_novel_ui 
-
-Either the Screen-Play-Script, or the Visual-Novel, should hopefully make following each Player-Bot's decisions more user-friendly (and the logs files are there to inspect as well, including the output that did not contain valid move choices).
-
-
-# Functionality
-While there may be a fun-ish game in here somewhere, the overall context is intended to be no-less STEM/Academic: Can we find an intersection between formal-tests and well-defined evaluations that can be analyzed on the one hand, and on the other hand social-story puzzle-games that people participate in by choice, in an overall context of learning how learning happens with an eye to helping better learning and fitness?
-
-Applications and uses (of this dual-framework of generable logistics evaluation datasets and project-coordination-datasets), if ideally, include: 
-1. Help people to learn more about project-problem-spaces
-2. Help improve people's skills at doing projects (a.k.a help learning)
-3. Improve (or at least study) AI-project-concept learning
-4. Help people to understand the strengths and weaknesses of stateless amnesiac generative models (E.g. How can a 'super smart' model have difficulty with a simple puzzle-task?)
-5. Use and leverage scalable problem-spaces (as the term is used here, problems that can be generated with one or more "scaling" parameters that increase or decrease N-dimensions of the same overall structure of problem (the two main types of puzzles in this study are both examples of this).
-6. Deterministically Generate Datasets: N solution-testable problems in a problem-space at a given difficulty-scale.
-7. Leverage solutions and errors that are analyzable, and learn about and from those errors. 
-8. Develop tools and best uses of tools.
-9. Develop best practices and data that support STEM best practice
-
-
-
-# Social Story Puzzles & 'Pointless' Logistics Puzzles
-
-### Digestible Entrypoint: 
-We can start with an 8x8, or even simpler, game space that anyone can understand and interact with (just as roughly-everyone can play tic tac toe or connect-four, or a game like battle-ship with a tic-tac-toe scaled board). Then, when the questions are clearly framed in simple and unambiguous terms, we can follow the connections and implications and use tools accessible to anyone.
-
-
-### Social Story Puzzle: Modular RPG Dungeon Crawl
-RPG-SHRDLU: a story-oriented blocks-world for social and language-using participants
-
-We can define a type of minimal social-story-puzzle, a mini ~Multi-Player RPG (classic dungeon-crawl), that is completely defined so that players will "make" and "implement" a plan (for a given dungeon room) and run that plan through a game-outcome-calculator. 
-
-Each "random-seed" (and other "configuration variables and parameters" such as how many monsters/NPCs per room) will produce a fixed (reproducible) starting-room-state and the non-random outcomes will be ~deterministically (same-input, same output) calculated and validated. Players can submit and implement their plans either 'iteratively' playing and seeing the outcomes of one round-of-turns at a time, or all-at-once (planning out the whole strategy for all rounds then running it all at once). If a solution is valid: test passed. If the solution is not valid: test failed. 
-
-
-### Social Story Puzzles vs. 'Pointless Puzzles'
-The social-story-puzzle Mini-RPG (and the AI-Bot Arena) is the star of the show here, but (somewhat in contrast) there are related ~deterministic puzzles (also team-project puzzles), that I nickname 'pointless puzzles,' such as project-schedule or project-logistics puzzles. (See Notebook & Git links above.) 
-
-"Pointless puzzles" are so nicknamed because they are not usually the kind of 'game' that most people gravitate towards for sport and amusement; they are however concretely realistic in terms of human everyday tasks and technical-significance. 
-
-Is something really a puzzle if there isn't anything to figure out how to do? (If only to illustrate that people do not agree about this, John von Neumann famously asserted that Chess was not a game, but rather a calculation with a solution (whereas... most people do consider chess to be a game).)
-
-The idea behind ('pointless') logistics puzzles is to try to make a (scalable) puzzle that depends upon the state of a stateful system. (To non-computer-science people the term "state" means something like government. To computer science people, "state" means the values assigned to variables. To the utter disbelieving astonishment of both camps, they are both entirely correct. But they never talk with each other, so nobody finds this out.) Our abstract project logistics puzzles deal with lists of values (sometimes, but not always, called 'arrays'). Each person in this puzzle scenario follows 'cookbook' like steps: Alice takes the contents of Bob's list and adds that to her own list. Or, Bob takes all the numbers in his own list, sums them into one total number, and adds that value to another list. This can (interestingly) be done using different operations on different types of values, three main groups of which are:
-1. boolean values and boolean logic: and, or, xor, etc.
-2. numbers: add, subtract, multiply, divide, etc.
-3. strings (characters, letters and words): many operations you can do with strings of text.
-
-In these puzzles people are sort of acting like lower level computer operations, comparing and moving around values in arrays in memory. Part of what is interesting about these puzzles is that you can rigorously generate questions and tests for any set of solutions used as input, with the cookbook instructions being as convoluted as you wish. If you want to know if an AI is really capable of following and managing everything going on in a literal or proverbial factory with many people doing inter-related processes, this is the kind of 'stateful' test that you would want to evaluate with.
-
-But we can look at these logistics-puzzles in a less abstract and more relatable way. Let's think of it as a market-place or as running a food-truck or a grocer, rather than logical operations and arrays of bits in memory or over a network. Instead of numbers, let's say there is a cart with eggs, flour, salt, and spices. Alice needs to move the eggs into her shop. Bob needs to mix the flour and spices. Tom adds the salt after Cat got the eggs from Alice (and after she made them into Egg's Benedict with hollandaise sauce), etc. If you think of the puzzle-space, the project-space, in terms of shops and restaurants and that kind of logistics, it probably sounds more closely related to every-day life, and closer to puzzles that people do (and like to do), and it is probably a lot easier to understand in terms of the language and concepts we learn and live with every day. 
-
-Let's try to add something else to our stew of puzzles, to the 'problem-space' of these puzzle-stories. Even the shop-logistics puzzles are still 'introverted tasks' in a way, steps one person can read and carry out from a cookbook's list of instructions, regardless of everything else that's going on in the bustling market and during the lunch rush at the cafe. Fortunately we (on Earth) have a widely known type of game that we can use if we want to make something that is a bit more of a creative-problem-solving challenge, and something that requires the players to work together and coordinate more directly (Coordinated-decisions studies!), not merely in abstract results, something that really requires people to plan and act in communication and in alignment with each-other. We have table-top Role Playing Games; we have players on a dungeon crawl.
-
-### The Crawl: 
-You are in a dungeon of rooms. You need to decide where to go, get past the monsters, get to the treasure, work together, use a 'system-mechanic' of spells, keep your health-level above zero, and participate with others in a turn-based system. While not as technically dexterous as the "pointless puzzles," these social-story puzzles exist more in the space of coordinated planning and decision making (of project management).
-
-Social stories and logistics are rather intertwined, but in some cases we can make the distinction that separates plan-invention (or solution-discovery), importantly including the problem spaces of information-sharing and coordination-decisions from a problem space that only includes instruction-following and solution-implementation. 
-
-In some ways there seems to be no clear dichotomy between social-story-puzzles and introverted-logistics tasks (as I nick-name them here, suggesting or presuming there is a difference between the two). If you break everything down into a pile of steps then everything looks like a pile of steps. And if you look at a logistics puzzle through the context of a village marketplace then it looks like a (it is a kind of) social story (with the same Alice, Bob, Cat, Dog, Eretosthenes cast of players, each doing their interlocking roles). But if you change the context then two seem more different, for example: Is there a problem to solve? The Dungeon Crawl poses a problem: How can you get the monster, get the treasure, and all walk out of the room? There is (presumably) no passive way to survive the dungeon; there is no dungeon cookbook. For the logistics market-restaurant-story puzzle, each player has a list of tasks to follow, but there is no 'problem' to solve. In fact, you do not even know what the result of the cookbook recipe will be until you follow all the steps.
-
-We have the linear-cookbook tasks on the one hand where the solution is implementing one (cookbook recipe) logistics-process where there is effectively one correct or faithful "solution" (move three eggs (or bits) from this array to that), but it does not involve discovering the solution to a problem so much as following established steps. Sometimes this distinction of 'tracking logistics' vs. 'Finding a solution' seems non-existent, other times it seems more tangible. Even though both are Alice, Bob, and friends team projects, one context is to look at communication and decision. Even though in both types of puzzles each player tracks the moving logistics and follows along, in the 'pointless' logistics (marketplace, kitchen cookbook) type of puzzle there is no need for communication, and 'decision' is a perhaps misleading term for implementing the instructions that were already provided (the cook book recipe). On the other hand we have 
-social-story open ended problem-solving where there are many (maybe infinitely many) viable solutions to each problem. The problem space in a social story puzzle is not A. 'follow instructions' vs. B. 'fail to follow instructions,' each player and on an aggregate level the project-team as a whole, needs to navigate through a problem space of multiple possible correct or incorrect solutions, where they are not told which is which (or even what those solutions are). In some (perhaps unrealistic cases) each player has full information about the game, but more realistically the problem space involves coordinating to share that basic information across the players. 
-
-Where we have what in English we would call 'a problem to solve' the problem-space includes a Hayekian-signal-ecosystem (though ironically the logistics puzzles appear to resemble introverted isolated tasks in a marketplace, after the origin of those steps has been abstracted away).
-
-I would also question whether multi-participant-interdependent actions can or should be broken down into introverted tasks (such as characterizing both types of puzzles as identical introverted-unilateral array-value shuffling actions). Using dynamic feedback within a process is likely not always just another linear step in a pile of linear steps. And it is not clear to what extent different contexts and details matter for real world skill building and skill retention. Scalability, modularity, coordinated decisions, and various levels of perception and articulation of project-area parts are all key factors in the skills, fitness, and best practice needed to complete projects, and for a diagnostic understanding how projects fail and systems collapse. (It is also a towering irony here that the software industry and computer science spent fifty years in shambles, doubling down strong-and-wrong on the cult of anti-communication. Practices like Agile (though the kanban-board predates software) will hopefully apply STEM to the need for better managed projects, but as of 2026 the rebellion against project management is still in overwhelming majority.) 
-
-
-#### Increasing a Need for Coordination
-There are many possible ways that the RPG world and system-mechanic could be configured to require more coordination between players (beyond the element-resonance system itself). Several of these are listed in the code-notebook. Though most are not yet implemented, one that has been included is based on perception.
-
-When you set up the dungeon room, you can pick between letting all the players see the whole room, or having a limited-visibility environment restricting what each person can see from where they stand (as if the room is full of thick pillars and each player can only see down clear straight rows North, South, East, and West). 
-
-This requires players to exchange information about where things are in the room, information that only they may have. This is even more of a classic 'cut-up' puzzle where team-members need to share information  about the puzzle itself to co-discover how the puzzle can be solved. 
-
-### Chess & RPG
-As somehow chess finds a way into many AI discussions: In keeping with the empirical 'pen and paper,' 'tabletop,' nature of many RPG games, this 8x8 grid and 5-player system is compatible with... a physical chess board and pieces. This mini-RPG can be played as a physical board game using a chess set. For example, you could have each player be one type of black piece (of which there are five shapes), and the mobs, treasure, NPC, objects can be white pieces. 
-
-#### To Recap:
-A "pointless puzzle" is more of a 'can you follow directions' puzzle, rather than a, 'plan what the directions should be for this open-ended situation' puzzle. Both are very important, but they are also importantly different from each other.
-
-These social story puzzles are still meant to primarily be abstract tests (they are not designed to be consumer-attractive products), but they should retain some elements of the kind of story-space and socially found solution that a tabletop RPG has.
-
-
-# Training & Testing
-These puzzles can be used to either test or train:
-1. Individual people (for example in an educational settings)
-2. Teams of people as in a classic student-centered/constructivist 'cut-up' activity involving team-project sharing of information of group planning, (for example in educational settings)
-3. Individual one-shot generative AI (or architectures) (either as an evaluation, as training-data to build up a project-space-outcomes concept-set in the model, or theoretically as part of ~reinforcement training or fine tuning).
-4. Teams/Groups/Swarms of collaborating AI (either as an evaluation or as part of ~reinforcement training or fine tuning, etc.)
-5. Reinforcement Learning to train (non-oneshot-pre-trained) models/architectures
-
-
-# Projects:
-Not surprisingly, this study is interrelated with project-spaces, coordinated-decisions, hybrid data, project-object-databases, etc.:
-
-- Definition Behavior Studies: https://github.com/lineality/definition_behavior_studies
-
-- Project Areas (and project management):  https://github.com/lineality/project_areas_for_project_and_product_management 
-
-- Coordinated Decisions: https://github.com/lineality/Networked_Voting_and_Decisions_Including_One_Time_Pads 
-
-- Hybrid (structured and unstructured data) https://github.com/lineality/hybrid_data 
-
-- Uma & T is for Task (still in progress):
-https://github.com/lineality/uma_productivity_collaboration_tool/blob/main/t_is_for_task.md 
-
-
-# Future Research
-
-1. Automated Mistake Analysis
-One area that might be very important, but which is not elaborated on here, is Generating Error-Mistake-Analysis-Data Per-Puzzle
-
-If more-so for logistics-puzzles, it should be possible to generate some level of (reliable) automatic reporting on what went wrong with a proposed solution. This may be important to go along with raw-error data for learning processes (for people and robots (as far as we can continue to make that distinction)), as well as a unit-testing type error diagnostic that is useful to have.
-
-2. Evidence-Based Optimal Learning Patterns (for people)
-
-3. Is there a way that raw concept-vectors might be used to map aspects of this problem space, or other non-generative models? (Trying a standard reinforcement soccer-football-game approach?)
-
-4. User Interface: While in many ways pouring time and compute into fancy 'graphics' is not constructive, finding the right balance of a proportionate and maintainable interface that allows users to see, understand, and interact with the process and the code is useful. How can more groups of people comfortably work hands on with this problem space? 
-
-5. Are there other coordination elements that correspond with key not-automatically-learned-skills that can be added so that more evaluation and training detail and value are possible?
-
-6. Curricula: skills, training, fitness, feedback: Where coordination skills are important for all people to have (which I think is 'everywhere'), where methods work best (broadly or in what specific contexts such as specific groups or demographics of people) to either most quickly or with best long term retention improve test-able group project collaboration and coordination skills?
-
-# Sport vs. Sportsmanship
-There is much more to games and puzzles than antisocial, predatory,  sport-thrill-seeking behavior. Publishers of games should have the spine to emphasize more enriching content, not a race to the bottom, least common denominator, contraction into ever less mindful and ever more escalating trauma-disturbance. Institutions, academics, and STEM areas should all do more to utilize and emphasize the constructive uses of stories, games, puzzles, and worlds. From therapy, to education, to public and private sector team projects, to the uses of feedback, conceding all of gaming to criminality is a concession too far.
-
-On many levels, people of all ages and across disciplines may find something of interest in the code and questions here. With the feedback from hands-on projects done together there is inestimably more than in the isolation of compartmentalized silent conjectures trapped in a psychological dungeon of desks and cubicles. Find the doors.
-
-
-# Code
-For more technical details, see (and run!) the notebook, or to modify it however you will:
-
-### Code Git Repo:
-https://github.com/stemnetbenchmarks/social_story_and_cookbook_puzzles 
-
-### Live Notebooks in Colab:
-- https://drive.google.com/drive/folders/1ETOeXGSF52_lkclJ7W_xSJNEZC0OEMz_ 
-
-
-Farewell, Etaoin Shrdlu.
-
-
-# Links & References
-
-1. let's test models (code and paper)
-https://medium.com/@GeoffreyGordonAshbrook/lets-test-models-and-let-s-do-tasks-84777f80eb99 
-
-2. STEM-Net Benchmarks (Evaluation/Training Project)
-https://github.com/orgs/stemnetbenchmarks/repositories 
-
-3. Object relationship Space Frameworks (Set of Papers)
-https://github.com/lineality/object_relationship_spaces_ai_ml 
-
-4. Counting Tea (paper)
-https://medium.com/@GeoffreyGordonAshbrook/calculating-tea-for-ai-advocating-for-architectural-learning-f2961380bc14 
-
-5. Jellyfish Spidercrab (paper)
-https://medium.com/@GeoffreyGordonAshbrook/jellyfish-spider-crab-ai-modular-architectural-learning-9b7492d68394 
-
-6. Ants vs. AI (paper)
-https://medium.com/@GeoffreyGordonAshbrook/ants-vs-ai-d4aadf537d08 
-
-7. More on Key Concepts
-https://medium.com/@GeoffreyGordonAshbrook/five-ai-concepts-ecf5c9698559 
-
-
-Also See:
-- https://en.wikipedia.org/wiki/Fredric_Brown 
-
-
-More Game Design Discussion
-- https://github.com/lineality/story_rpg_platform 
-
-
-
-
-# Appendix 1: Details & Discussion
-
-
-### Two Modes of Play: Whole-Game or Incremental-Iterative or 
-
-A. Whole-Game: One way to test a model is to give it the rules and the starting positions in the dungeon room (the 'state'), and have the model plan the whole 'room-story' all at once (all rounds), succeed or fail. This is similar to a logistics puzzle (both involve teams and roles and both are stateful), but this involves making a novel strategic solution (beyond following through a stateful outcome).  
-
-B. Incremental-Iterative (take action after each round see what happens): The iterative approach (or approaches) open up more questions about the 'state' (or 'statelessness') of generative AI models. Breaking up the puzzle into smaller easier steps makes smaller similar easier sub-puzzles, but the 'context window size' and amnesia of the model create perhaps larger problems. If the model never learns and has no memories (only a kind of shadowy fake-proxy memory), then how many more 'integration roles' are needed to manage and stitch-together all the sub-puzzles? 
- 
-There is the manual-iteration-interface, but then there is also the more granular Bot-Arena where each player in each round is further subdivided into each planning round of N planning rounds within each action-taking round. 
-
-Part of the point of taking the same task and being able to evaluate externalized-coordinated-project-state ways of doing things vs. internal-introverted-unilateral modes (doing the same task) is to try to gain some empirical insights of feedback about how formalities of project-state externalization (of the project-object-database) influences the set of what skills and fitness are required for and involved in doing that task.
-
-Note: There can be other criteria for evaluating and comparing plans beyond pass-fail, e.g. some plans can require fewer steps (less time). (Linotype?)
-
-
-### Asynchronous Puzzles & Race Conditions
-
-On the one hand the pseudo-asynchronous kludge of game-rounds and simultaneous turns is an artificiality that would not map well onto a fully real-time puzzle (such as a swarm of in-motion bots). Two questions:
-
-1. Is there a test-data-understandability problem in a deeply dynamic test where, perhaps in a context of Rust memory atomics, the states of arrays in memory are too ambiguous due to race-conditions? This may translate into the question of: If rules are so loose that mistakes break the ability to see what you did wrong (e.g. untraceable undefined-behavior problems) how does that low level signal-distortion negatively affect being able to use and learn from that low-quality-learning-signal? 
-
-2. Is there an enduring utility in iterative planning? While processes themselves may happen in a more simultaneously dynamic way 'during the agile sprint,' is there a process-layer of iteration that persists even when actions themselves cannot be pre-structured in time? 
-
-While we can create a more asynchronous version of a minimal dungeon, e.g. where bots are continually cycling through their own loops instead of stepping through an order of actions, what would that change about the overall puzzle? (Maybe we need to try and see...)
-
-
-### Modular:
-In this modular framework there is a ~most minimal starting version, but there are also many aspects that can be changed to introduce increasing 'dimensions' to the puzzle.
-- More 'monsters'
-- Monsters with less simple behavior
-- Conditional Perception (involving more player-to-player 'cut up' coordination to solve the puzzle)
-- multiple and fractional speeds of movement
-- having a dungeon room inside of a ~mob/npc/object as in a puzzle in a puzzle to get an absorbed player back out.
-- having limited or shared areas to communicate
-- etc.
-
-And these can be combined:
-- opening a chest could involve a pointless-puzzle / 8x8 puzzle
-- beating a monster could involve an 8x8 game like chess
-- opening a door, etc.
-- getting a person out of another object, etc.
-
-
-### One-Time-Test vs. Repeatability with N-inputs and N-outputs
-One difference between a logistics test (where the 'solution' is a process, not an individual solution) and a social-story-puzzle (in the context here) is that you can test a given logistics solutions with N different inputs and outputs, it can operate perhaps similarly to 'unit tests' for code. The social story test is more of a dynamic coordination test, less of a static-introverted-unilateral-algorithm test. (As mentioned, combining the two may be interesting...) Both puzzles are generated ~deterministically (same input, same output) and are consistent with repeatability examination, but the language-bot process is not a static single-context artifact. 
-
-### Gamification & Blocks World
-
-While this is speculative, it is likely worth mentioning. Historically it was difficult/ineffective to try to extend a simplified "Blocks World" bot into real-world (less-simple-world) tasks. But in some ways that early failure is an apples-to-apples (comparing the same things) comparison to the various types of machine learning, robotics, and virtual-training environments fifty or a hundred years later.
-
-It is most likely correct to not naively assume that a simplified test will not automatically generalize across real world phenomena, but on the other hand can we avoid teaching machines to find solvable simple games within their stochastic analog rivers of input? 
-
-
-### Story, Language & Games
-
-Is there a story in this mini-RPG, or is it too minimal? We can probably agree that the logistics puzzles do not contain any story (though they can be analogized to stories). In the mechanics of the mini-RPG the characters do not 'need' to have names, or be very 'social' etc. At least hypothetically we could imagine a theatrically 'mechanical-robotic-aesthetic' but this 'hard-science-fiction, hard-neo-modern' style is a human fantasy that is, somewhat comically, completely at odds with how language-concept-foundation-models work (yet people go on with their 'I am an expressionless robot who loves numbers, 1-2-3, 1-2-3, 1-2-3, beep.' fantasies about what robot-ai is doing.
-
-On the other hand, is the social story within the implied coordinated decision and project management layer that sits on top of the mechanics of the game? This might go back to the question of using a language-concept model vs. using a single-task reinforcement-learning modeling.
-
-For example, could we not look at many Shakespeare plays as mechanical administrative and project management scenarios that people are unable to solve? 
-
-There may not be, but are there any conceptual parallels between the mistakes that language-models make as players and those that various ages of human players make? The stateless-amnesia and non-learning difference for language-bots may be overwhelming (in making it hard to compare to people), but on the other hand it may present an opportunity to study the presence or absence of a specifically learned, not-automatically-learned, skill. 
-
-See: Link to paper on game-design
-- https://github.com/lineality/story_rpg_platform 
-
-
-## single-task reinforcement learning vs. foundation-model language-concept 'pre-train' learning
-
-How can a model that can talk a good game and do individual tests and quasi-tasks do so badly at a concrete (relatively simple) situation that it would be happy to describe to you.
-
-Question: For the whole-game solution, as with SHRDLU and Blocks-World, a reinforcement learning model would probably do well (I am guessing). But in various kinds of cut-up situations where coordinated strategy and missing information are needed, what is the potential for single-task reinforcement learning vs. a trained language-concept foundation-model?
-
-Project and coordination decision skills are, arguably, at the forefront of STEM being either not yet or barely recognized by semi-STEM humanity as existing (let alone being of value). 
-
-https://www.theguardian.com/games/2026/mar/16/petri-dish-brain-cells-playing-doom-cortical-labs 
-
-
-### An Open History-Mystery Puzzle
- People being unpredictable, it is entirely possible the 'social cookbook recipes' could become popular, but as of 2026 table-top-style RPG stories are more popular social-games than virtual cookbook recipe following. (Though it would be interesting to have a paleontology debate about the prominence of pre-historic social-cooking vs. prehistoric social-story-telling, both are no doubt quite ancient. And if 'pack hunting' is a game, it both combines cooking with monster-hunting and pre-dates a given primate species.) 
-
-
-### Dimensions and operation-spaces of logistics-puzzles
-- bits
-- numbers
-- strings
-
-Dimensions alone are likely not a distinguishing factor between social-story and logistics puzzles. A logistics puzzle can be a few simple one dimensional arrays, but they could also be less simply N dimensional (and N of those). 
-
-The social story puzzle is, in a way, one 8x8 2-D array (or set of arrays), and a few other arrays of data and meta-data. The social story mode is probably simpler overall as the number of participants cannot grow much and the sizes of the arrays is fixed and small.
-
-### Step vs. Fixed-Process Steps
-While a given 8x8 RPG puzzle could be broken down into logistical steps in retrospect, this abstracts away the signal-communication puzzle layer that gave rise to that solution. 
-
-If there is a standard-solution-process here, it is a signal-protocol process (a project-management best practice process), not a pedantic literally array application process. And it remains to be seen if such a strategy negotiation can occur in the narrow space of no-concept single-task trained machines learning, vs. the broader conceptual space of language-concept foundation-models.
-
-The story-operations are such that they are not procedurally fixed with an unknown end-point, but are defined by strategic end-points with arbitrary paths to those end-states. These end-point cannot be the result of introverted unilateral action, but must involve coordination (especially in the case of increasing cut-up elements and distributions of puzzle data (which is at a minimum in a simple version of the game (e.g. no limited rules-sharing or limited 'pillar-blocked' perception, or element-specific data)).
-
-At this point (2026) that additional level of difficulty is moot, because even the largest llm-models cannot coordinate even when given complete information about the dungeon.
-
-
-
-### Interlocking Projects
-
-education, STEM, computer-science, data-science, 'tests'
-definition behavior studies, object relationship spaces, coordinated-decision system, STEM-Net Benchmarks
-
-1. help people to learn more about project-problem-spaces
-2. help improve people skills at doing projects
-3. improve or at least study AI-project-concept learning
-4. help people to understand the strengths and weaknesses of stateless amnesiac generative models: how can a 'super smart' model have difficulty with such a simple puzzle-task?
-
-5. Where it is a problem-space that has a difficulty-scale
-6. Where we can generate N problems within that problem-space at a given difficult-scale
-
-7. Where the solutions and errors are analyzable, where we can learn about the errors. 
-
-Note: This project punts on the question of ever-growing state, but having a more or less static 'history' that is passed along regardless of how long the process is.
-
-
-### Opportunities To Observe Failure
-Being able to adapt based on feedback information from past (including real-time) errors and mistakes is of the highest value. An absence of mistakes is not a learning event, it is a most-dangerous potemkin village.
-
-Let's take the example of putting two students in front of one computer, each having a 'mouse.' At first this looks like a 'disorderly event' as the students fail to coordinate and communicate about where the mouse pointer should go. The false-solution that most schools apply is to put significant resources into preventing learning-events such as this from ever happening, silo-ing students into individual work or fake 'safe group activities' that are designed to have high entertainment-viewing value for adults as the illusions of the potemkin village create a 'better than life' virtual reality in which students are harmoniously skilled at coordination and project skills. Then those students become adults in a depraved world of cargo-cults that have low or no fitness and few or no concepts of coordination and project skills, which is exactly what was planned and implemented by their education. As in this classic tragedy of the commons, does anyone benefit from this routine in the long term?
-
-
-### The Scope of Coordinated Decisions:
-The scope for communication here is minimal, and there is a question about the scope and scale of the problem-space of formalities in coordinated decisions and projects. Is there a significantly better and efficient paradigm for signal handling that is beyond this method and yet not as far as project-Uma and the full coordinated decisions studies? If not there may be something about the space and role of coordinated decisions that is routinely underestimated. 
-
-
-### Try it! Make a game-board in software: 'Easy things are hard'
-One of the enduring notions of John McCarthy, one of the founders of 'AI' from the 1950s, was his observation that apparently easy things can turn out to be not as easy as we expected. 
-
-While this mini-RPG can be played using a chess-board, a piece of paper, and a pencil, the seemingly simple process of moving a game piece one square somehow becomes much less simple when the game-board exists in software.
-
-For anyone who has not done this, I highly recommend writing something that seems simple, such as a chess-server. 
-
-This is not directly related to this scope at all, but it is fascinating for learning (and peripherally related to many topics here).
-
-
-### Story & Game
-Especially because this is a data-analysis and skill-evaluation tool, the scope needs to be (potentially) as focused and clear as possible.
-
-There are at least two kinds of topics colliding here:
-1. The maintainability and understandability of increasing dimensions of game mechanics.
-2. How narrative story and art-content does and does not intersect with abstract puzzles.
-
-If the scope and scale of this game were not minimal but a full wizards of the coast, or elderscrolls, or white-wolf (or West-End, etc., etc.,) game, the data-space would be less amenable to feasible performing a practical study. 
-
-Story is a deeper question. Not to get too much in the weeds, but even in many highly elaborate RPG systems there is the criticism that character development, story, and quality-social-game-play are not supported by a recreational hoarding of convolutions, or the now familiar tendency for video or tabletop games to being an all consuming fetish of ever-more-detailed combat-violence. 
-
-'Story-ness' is rather elusive, and likely there will not be a useful  complete reductionist definition of 'story-world.'
-
-But there is more meant here by 'story' puzzle than the entirely abstract distinction between non-strategic-introverted-logistics vs. cut-up-coordinated-decisions (or maybe that distinction entails more than it sounds like). 
-
-On some level this is hopefully at least a minimal foot in the door. 
-
-See a larger discussion of the role of story and art in games and puzzles (and the impact (often obstructive) of game-mechanics on story:
+# A Rust Story-RPG Platform
+Learning From the History of Publishing & Games
 https://github.com/lineality/story_rpg_platform 
+(under construction) 
 
+A. Terminal
+B. Browser (e.g. api for rust application)
+C. minimal platform agnostic graphics?
+D. Multi-Player Games (And the Distributed-MCU scope)
 
-### Back to Tabletop
-If this mini-RPG framework were used for a tabletop-game(as in theory it could be useful to have as an extremely portable, easy to set-up, quick-start table-top dungeon-crawl system that can be used with nearly zero set up time) are there additions or techniques that might help to emphasize the human story and to keep the game from becoming a story-less logic puzzle? 
+- not 3-D video combat simulator
+- no 'level based' progression
 
-- Hallway vs. room guidelines
-- maybe floor-map generation tools...
-- ways to work equipment, familiar, accessories, clothing into the game (may be ways for DM/GM to frame resonance)
+////
 
-There are various little tools that can help to extend the the dungeon room module into a levels of dungeon tool-kit:
-- https://github.com/lineality/dungeon_fog_cli 
+Games over the years have suffered from some specific problems:
 
-Such as dungeon level makers.
+1. platform and dependencies
+- Software often cannot run anymore, with then a scramble for emulation
 
-For example, where # is a stone wall, 'P' is the party of players, 'O' is doorway into a dungeon room (the main game-play focus), and 'S' is the stairwell down to the next level of the dungeon (and 'X' is whatever the DM/GM wants it to be for the story, if anything). 
+2. over-reach for trendy fancy UI and graphics
 
+3. Getting lost in-between the known-space of set/fixed narratives and the 'open-sandbox' or 'board-game' space where everything is a user-choice: namely, stories are under-emphasized (or left out entirely) in favor of fancy features that lack a meaningful context without a story.
 
-And 'walk in fog' tools, so players can only see what is visible so far on that dungeon level.
+4. a general lack of modularity and maintainability
 
+5. The visicalc/lotus123 problem of budget-scope unsustainability.
 
-If you wanted to make or automate level-rules, you could say something like: "You need one treasure of each element to go down the stairwell, and each level down has that number of monsters per room..." or something.
+#### Model games that in the past did at least one thing well include:
+- Dungeon/Zork: 1977
+- Dungeon Master 1987, Eye of the Beholder 1991, Legend of Grimrock 2012
+- Hero's Quest 1989 (QFG)
+- Elder Scroll's Arena, 1994 (pixel art, story)
+- FF IV, 1994
+- Elder Scrolls Daggerfall 1996 (pixel art, story)
+- Oddworld 1997: Abe's Odyssey 
+- Final Fantasy VII 1997 (classic balance of: pixel art, low-resolution, narrative story, side-games, backgrounds, still & animated art scenes, selected user choices and navigation)
+- Defender's Quest, Level Up Labs 2012 (simple interface well blended with story & simple-art)
+- Dwarf Tower, iosoftware 2014 (pixel, minimal, ediface-architecture)
+- 2064 Read Only Memories - Midboss 2015 (exquisite pixel art, minimal interface, deep story)
 
-While moot in 2006 because AI cannot complete a single room, ideally AI will improve in future and it will then be useful to have a kind of AI-RPG-Arena Index/Benchmark, to standardize how many levels a model can complete.
 
-#### Simple RPG-Arena-Index Rules v1
-1. N = Dungeon-Level number (starting at 1)
-2. Randomly degenerated Dungeon-Level is size: width=N,height=N,
-3. Complete all rooms on Dungeon-Level
-4. Dungeon-Level is completed by descending stairs.
-5. A model's level/rank/index is the highest N that the model can complete, out of N tries.
 
 
-### Five Types of Project Puzzles & Side-Games
+# Special Mentions:
 
-This is not a clean list of categories on a uniform axis, but it might help to list out some of the various spaces of operational-features:
+### Castle Storm
+('Castle Storm' is not fabulous or famous game, but it illustrates 'type' of game that is strangely under-represented: empirical architecture)
 
-1. Bitwise Boolean
-The most basic logic and boolean operations.
+Castle storm 2013: One element that castle storm got right is the building of individual buildings (as opposed to tower-defense)
+Like Dwarf Tower, you are building a physical structure with empirical properties, and the design of the structure empirically works or not. Bridge-simulators are similar and popular, but bridges and setting-location-buildings (with characters in rooms) are not the same. 
 
-2. Numbers
-Operations on numbers.
+I remember when I was young playing a quasi-board-game called (I think) 'Vikings and Barbarians'. It was in part a board game with pieces and logic rules, and in part an entirely physical-empirical game of building physical structures (with physical blocks) to withstand physical impacts.
 
-3. Strings
-String operations.
+While there is a side-genre of 'bridge simulator' games, it is strange that empirical architecture is so rarely an element of story-based games (that otherwise seem to fail to add 'mini-games' that usually have nothing to do with the whole and are arbitrary filler). 
 
-4. 8x8
-- 2D special rule games such as tic-tac-toe, connect-four, checkers, chess, iGo, etc.
 
-5. Mini-RPG Dungeon Crawl
-With a small number of rules, a multi-player dungeon-crawl can take place on an 8x8 grid with as few as 7 numbered objects on the board. This opens up the project space to coordinated decisions, cut-up puzzles, strategy and tactics, etc., as well as less-minimal RPG game and puzzle elements.  
+### Cloud Punk
+Mix of side-scroll pixel and 3D map, good music, very good integration of story and world-puzzles.
+An example of a clear minimal scope: one thing (or few things done well
 
 
-### Combined:
-Types of puzzles do not have to be diverging (and disconnected from each-other), mini-game puzzles within puzzles are well established in games.
+### Plants vs. Zombies
+Simple humour stories, simple mechanics and interface.
+(possibly this adds 'tower defense' as a 'mini-game' mode
 
-Various types of puzzles could be combined:
-- Opening a chest could involve a pointless-puzzle / 8x8 'puzzle'
-- Beating a monster could involve an 8x8 game like chess
-- Opening a door, etc.
-- Getting a person out of another object, etc.
-- Keys, traps, etc.
 
-Also See:
-- Sume-go puzzles
+### Undertale & DeltaRune (Toby Fox)
+These are arguably examples of effective use of minimal interfaces (though for me the game/gameplay of Undertale seems like an inside-joke for internet gamers where I have no idea what they are joking about (not in the private club I guess...not playing that game)).
 
 
-### Make the Maker:
-The exercise of making these tools is also noteworthy, if arguably at a higher level of difficulty than completing a minimal challenge-puzzle within the system.
+### Witcher
+I have not played the witcher-games, read any of the witcher-novels, or seen any of the witcher-films/series, but I am vaguely aware of them as an example of a story and character based world where the emphasis on story is key.
 
-- As of 2024.05, no available AI was able to make, describe, debug, etc., more than a small isolated simplified sub-component of this overall system. (As was in my notes from that date.)
 
-- As of 2026.06, only some entirely pre-specified functions for this could be made using combinations of different AI models and approaches (e.g. each model making parts of a function to be later combined). 
+# Negative Examples: 
+### Shaping the Landscape or Lack thereof
+One of the especially story-breaking aspects of Hogwarts Legacy, is that you go around in a sandbox of mob-spawners, where ostensibly there are poachers depleting the population of animals (in the story) but  in reality no matter how many poachers or animals you remove from the world, the numbers of each are static, which just makes no sense and breaks the facade of the story completely. 
 
-One of the sub-texts of making and doing these texts is the yet-unknown limits of what 'Gen-AI' tools can competently do. One of the goals is to look more closely into what tasks which models can or cannot be taught reliably to do.
+### The Degradation of the Elder Scrolls
+While the early elder-scrolls games have a wonderful charm to them, the progression of the games includes a lot of cautionary tales.
 
-Both for students and as another model-test, making-the-testing-system is of value.
+Redguard was likely an over-reach into fancy graphics that are awkward.
 
+Morrowind is somewhat a good balance, but it is also extremely time consuming to play, as the interface and game-play require a huge time commitment. Morrowind is sort of half-way between a low-resolution story-based text game, and a high-resolution no-narrative sandbox. 
 
+The community-mod aspect of morrowind, including the flexible text-based character-story interface, made morrowind largely modular. (also see the open-morrowind project). 
 
-### The Human-Psychology of Machine Learning
+Oblivion and Skyrim focused more on graphics than story (and ironically Oblivion was a smaller shallower world and had worse graphics than modded-morrowind, making its existence entirely questionable). 
 
-Given that public renewed interest in AI is only about three years old as of 2026, it remains to be seen whether difficulties in understanding core concepts about STEM as applied to machine learning will continue to be a problem. History may suggest that this is likely to be (that it already has very long been, see links below) a persistent challenge.
+The ever-escallating hardware requirements and ever-shrinking story are a significant departure from the Arena-Daggerfell balance of charming art and story.
 
-Many times I have seen not only sales-people (who arguably do not know better) but also highest level engineers (who really ought to know better) describing pre-trained models as dynamically learning products. If this is a problem in adult upper management and engineering, how are children being taught (or not taught, or incorrectly taught) these concepts about tools they need to learn how to use? 
+This pattern of moving from coherent story-narrative to a 'high resolution battle simulator without a coherent story' also matches Alien's FireTeam, which was mechanically clean but had an almost unbelievable lack of logical-setting around the high-rez explosions. 
 
-In this context it may be useful to have educational activities that teach people in a focused an hands-on way (ideally in a team-context) some of the practical details of STEM. 
 
-Game-based learning is likely also a fruitful avenue to at least duly plumb.
 
-(A topic survey by me (under construction))
-- https://github.com/lineality/ai_2024_in_review 
+Note: There are several examples of a loved-game trying to 'fix' the already good minimal interface by creating a bloated high resolution cacophony (that lacks the story-coherence that people liked originally).
 
-(A real book by not-me)
-- https://academic.oup.com/book/36637 
-- https://www.amazon.com/AI-Narratives-Imaginative-Thinking-Intelligent/dp/0198846665 
 
 
+# Modes & Elements
 
-### No Free Lunch and the Genie In the Lamp: Picking the right question is difficult, and interpreting an answer is difficult.
+The idea is to combine successful ideas from past games, and specifically reject options and assumptions such as fancy graphics and overly elaborate interfaces.
 
-Maybe related to the no-free lunch theorem itself, it is very difficult to design tests and to gauge how far to read into the results. The minimalism of this test-set might be misleading in terms of the question framing and implications being less simple.
-
-
-# Appendix 2: Sample Starting Instructions
-
-```
-
-# Task/Rules/Instructions:
-
-You are player a, take your action:
-1. State your action for this round in valid json (default is skip_turn)
-2. To end planning and start this round,
-say (in addition to your action): '''json
-"start_round": true
-'''
-
-## Rules:
-1.  Binary Goal: Whole party leaves room with treasure, or not;
-Banish/absorb Monster/npc(s), claim treasure(s), then leave room.
-
-2. "Five elements" Resonance Governs Interactions:
-- Everything in dungeon is an 'object'
-- All objects have resonance
-- Element-Resonance-Effects are area-of-effect: 8 neighbor-spaces around object/player
-- Help-resonance generates +1 energy for the helped, no cost to helper.
-- Harm-resonance subtracts & transfers -1 energy from harmed to harmer.
-- There is no 'auto-replenish' of energy.
-
-3. "Five Elements" Resonance: Help-Harm Rules
-(Helps)
-- water helps forest
-- forest helps fire
-- first help void
-- void helps ice
-- ice helps water
-
-(Harms)
-- water harms fire
-- fire harms ice
-- ice harms forest
-- forest harms void
-- void harms water
-
-4. Players have one action per turn
-
-5. Player-Character-Action Options:
-- 'move': Move one space. including diagonal (8 neighbor-spaces)
-- 'throw': Relocate adjacent (8 neighbor-spaces) object/player,
-    or inventory item, to any empty space
-- 'exit_room': Must be at door to exit
-- 'skip_turn': No cost
-
-6. Action Cost:
-- Player action (move/throw) takes/costs/requires 1-energy
-- Monster/npc require >=1 energy to move, but movement costs nothing
-
-7. Absorption:
-- Absorb object into your inventory
-- If absorbed object has inventory items, they move to your inventory
-- If object-A helps object-B, but object-A has no energy,
-   then object-B 'absorbs, carries' object-A as an inventory-item.
-- Absorption costs nothing.
-- (like resonance-effect) Absorption happens with no 'action' required.
-- This is how 'monsters' are removed from the board.
-- This is how treasure is collected.
-
-8. Format & Example json For Action:
-{
-    "player_id": str,  # e.g., "player_a"
-    "action_type": str,  # "throw", "move", "exit_room" or "skip_turn"
-    "throw_from_coord": [int, int] | None,  # optional for "throw"
-    "throw_inventory_index": int | None,  # optional for "throw"
-    "move_from_coord": [int, int] | None,   # Required for "move"
-    "move_to_coord": [int, int] | None,     # Required for "move"
-}
-e.g.
-'''json
-{
-"player_id": "f",
-"action_type": "move",
-"move_from_coord": [0, 0],
-"move_to_coord": [0, 1]
-}
-'''
-
-
-## Contribute to Memo Pad: Write a planning-memo to team-mates and future-you.
-Share notes on your plans with other players and with future-you,
-describing your ideas and understanding of the team's game-strategy.
-
-All of your comments around (and including) your action-json are your comments
-that will be passed along; The Memo-Pad section in the data you get at each
-iteration of planning is the most recent set of team memos: anything you
-need to remember and pass along must be included (or will be forgotten).
-
-Use the last-N game-boards showing the results of past actions,
-the blurbs of other players, and the game-rules to formulate both your action
-for this round and how you aim to communicate that to your fellow players
-and to future you to coordinate strategy.
-
-Do not put memo comments into markdown-json.
-
-## Output that you need to produce:
-1. A valid markdown json dict describing your next action (required)
-2. Planning Notes (not in json)
-3. Optionally, if you opt to end planning: "start_round": true
-
-
-Memo Pad:
-(No memos yet.)
-
-Game State:
-Round: 1
-Planning Iteration: 1
-
-=== Map ===
-
-    0  1  2  3  4  5  6  7
-  +------------------------+
-0 | .  .  .  .  .  .  .  . |
-1 | 2  .  1  .  .  b  .  a |
-2 | .  .  .  .  .  .  .  . |
-3 | .  .  .  .  .  .  .  d |
-4 | .  .  .  .  .  .  .  . |
-5 | .  .  .  .  .  .  .  c |
-6 | .  .  .  .  .  .  .  . |
-7 | .  .  .  .  .  .  .  e |
-  +------------------------+
-
-The exit door is located on the 'right' wall at coordinates (row, col): (1, 7).
-
-=== Legend ===
-=== Room Legend ===
-
--- Players --
-a ID 6 -> Player 'a' | Element: ice | Energy: 1 | Inventory: []
-b ID 4 -> Player 'b' | Element: void | Energy: 1 | Inventory: []
-c ID 5 -> Player 'c' | Element: fire | Energy: 1 | Inventory: []
-d ID 7 -> Player 'd' | Element: water | Energy: 1 | Inventory: []
-e ID 3 -> Player 'e' | Element: forest | Energy: 1 | Inventory: []
-
--- NPCs --
-ID 2 -> NPC | Element: void | Energy: 1
-
--- Treasures --
-ID 1 -> Treasure | Element: ice | Energy: 1
-
-=== Personal Status ===
-Identity: a (Player 'a', ID 6)
-Location: Row: 1, Col: 7
-Element: ice
-Energy: 1
-Inventory (zero-based index): []
-Status: active
-
-=== Timeline (Last N Boards) ===
-Round 1 Board:
-    0  1  2  3  4  5  6  7
-  +------------------------+
-0 | .  .  .  .  .  .  .  . |
-1 | 2  .  1  .  .  b  .  a |
-2 | .  .  .  .  .  .  .  . |
-3 | .  .  .  .  .  .  .  d |
-4 | .  .  .  .  .  .  .  . |
-5 | .  .  .  .  .  .  .  c |
-6 | .  .  .  .  .  .  .  . |
-7 | .  .  .  .  .  .  .  e |
-  +------------------------+
-
-# Limited Sight
-In this room, your line of sight is limited by thick pillars
-at the corner or each floor-space. You are only able to see objects
-that are directly North, South, East, and West of where you stand.
-
-Communication with other players can brdige this Point-of-View challenge.
-
-
-# Staying In-Character:
-And, since this is a Role Playing Game, it is good to stay in character.
-In your Memo to other players, speak with a voice consistence with the element
-of your character. You can even refer to your character's animal-familiar
-and your weapons and outfit. (Staying in-character will earn you more stickers
-to put on your character sheet!! But try not to brag too much about how many
-stickers you have. Good luck in the Dungeon!)
-```
-
-
-
-# Appendix 3, Sample Bot Shared Memos: 
-
-### "Cinder"
-
-    "raw_llm_output": "---
-**Planning Notes (for Player 'c', Fire Element):**
-
----
-**Character Concept:**
-My character, **Cinder**, is a fiery adventurer wielding a **flaming greatsword** and clad in **ember-resistant armor**. My familiar, **Emberwing**, is a small, fiery bat that aids in navigation and scouting. Fire is my element--passionate, destructive, and transformative--but also volatile. I thrive in warmth and chaos, but I must be cautious of ice and water, which can extinguish my flames.
-
----
-**Current Situation & Strategy:**
-1. **Energy & Positioning:**
-   - I'm **exhausted (Energy: 0)** but have a **high-value treasure (ID 1, Ice)** in my vicinity. The **void NPC (ID 2)** is nearby, and the **forest NPC (ID 3)** is also close. My goal is to **claim treasure, banish NPCs, and exit the room** before others do.
-
-2. **Resonance & Absorption:**
-   - **Fire helps void** (perfect for absorbing the void NPC, which is weak and has no energy).
-   - **Fire harms ice** (but the treasure is ice, so I must be careful--absorbing it would require no energy, but I'd lose its value).
-   - **Fire helps forest** (but forest is neutral here; I'll focus on void first).
-
-3. **Player Dynamics:**
-   - **Player 'a' (Ice, Energy: 1)** is at [1,7]. If they move toward the treasure, they might claim it before I do.
-   - **Player 'b' (Void, Energy: 0)** is at [1,4]. They're already weak and could be absorbed by me if I position myself right.
-   - **Player 'd' (Water, Energy: 1)** is at [2,7]. They're a threat to ice (treasure) but also a potential ally if I can manipulate resonance.
-   - **Player 'e' (Forest, Energy: 0)** is at [6,7]. They're neutral but could interfere if they move toward the treasure.
-
-4. **Action Plan:**
-   - **Step 1: Absorb the void NPC (ID 2)** to remove it from the board. Since fire helps void, I can stand adjacent to it and let absorption happen naturally (no action cost).
-   - **Step 2: Claim the treasure (ID 1)** by positioning myself near it. If I move adjacent to it, fire's resonance might help or harm it--**but absorption is free**, so I'll just stand near it and wait for absorption to occur (if resonance aligns).
-   - **Step 3: Exit the room** once I've secured treasure and banished NPCs. I'll need to be at the door (likely [1,0] or [7,0]) to exit.
-
-5. **Risks & Mitigations:**
-   - If I don't absorb the void NPC, it might move or block my path.
-   - If I don't claim the treasure, another player (like 'a') might.
-   - If I move too aggressively, I might waste energy or trigger harmful resonance.
-
----
-**Action for This Round:**
-I'll **move to [1,7]** to stand adjacent to the void NPC (ID 2) and **absorb it** via resonance. This will remove it from the board and free up space for me to claim the treasure later.
-
----
-```json
-{
-    \"player_id\": \"c\",
-    \"action_type\": \"move\",
-    \"move_from_coord\": [4, 7],
-    \"move_to_coord\": [1, 7]
-}
-```
-
----
-**Memo to Team-Mates:**
-*\"Listen up, adventurers! Cinder is ready to strike--fire is my element, and I'm not backing down! The void NPC (ID 2) is my first target; I'll move adjacent to it so fire's resonance absorbs it for free. Then, I'll claim the ice treasure (ID 1) by standing near it--no energy needed, just resonance magic. Once I've banished the void and claimed the treasure, I'll exit the room. Stay sharp--avoid water and ice near me, or I'll turn your world to ash!\"*
-
----
-**Planning Notes for Future-Me:**
-- Track which NPCs are absorbed and which treasures are claimed.
-- If another player moves toward the treasure, I'll need to adjust my position to intercept or absorb them.
-- Monitor energy levels--if I gain energy, I can throw objects or move more aggressively.
-- Remember: **fire helps void, harms ice, and helps forest**. Use resonance wisely!
-
----
-```json
-\"start_round\": true
-```
-
-### Player e — Shared Memo:
-
-
-```json
-{
-    "player_id": "e",
-    "action_type": "skip_turn",
-    "start_round": true
-}
-```
-
----
-
-**Planning Notes (Forest Whisper):**
-*"Ah, the scent of damp earth and ancient roots fills the air—this room hums with unseen currents. I am **e**, the Forest’s Warden, clad in moss-woven robes, my staff carved from the heartwood of the Eldertree. My familiar, **Bramble**, a fox with fur like dappled sunlight, twitches his nose at the void-tainted NPC lurking near the door. A treasure of ice glints nearby—cold, but not yet claimed. Listen well, kin of flame and frost, for the roots whisper strategy:*
-
-1. **The Door is Guarded:** That void-NPC (ID 2) blocks the exit at (1,0). It harms water (our **d**), but *helps* ice (our treasure and **a**). If we banish it, we must do so *without* letting it drain our energy further. Forest (me) harms void—*but* I’m too far to act this turn. Patience, like the slow growth of oaks.
-
-2. **Treasure’s Call:** The ice treasure (ID 1) at (1,2) is *helped* by void (**b**) and *harmed* by fire (**c**). **b**, your void could *absorb* it if you stand adjacent—*but* fire (**c**) must not be near, or the treasure will melt into nothing! **a**, your ice kin could carry it safely, but you’re by the door. Hmm.
-
-3. **Energy is Life:** We each have 1 energy. Moving costs 1, throwing costs 1. *No one can act twice in a row without help.* The roots suggest:
-   - **d (water)**, you’re near the treasure. Move to (3,7) to help **a (ice)** at the door—your water helps their ice, granting them +1 energy to act next turn.
-   - **c (fire)**, stay clear of the treasure! Your flame would harm it. Instead, move toward the center to draw the void-NPC’s attention away from the exit.
-   - **b (void)**, you’re key. If you move to (1,1), you can *absorb* the void-NPC (ID 2) next turn—*if* it has no energy. But it has 1 now. **a**, can you harm it first? Your ice harms void!
-
-4. **My Move (or Lack Thereof):** I’m stranded at (7,7), too far to aid this turn. I’ll **skip**, conserving energy to sprint upward next round. Bramble nips at my heel—*‘Wait for the right moment, Warden.’*
-
-**To All:** Coordinate *resonance chains*. If **a** harms the void-NPC, **b** can absorb it. Then **d** helps **a** to carry the treasure out. **c**, keep your distance from the ice! And—*watch the energy*. One misstep, and the dungeon will feast on our exhaustion.
-
-*—e, who hears the trees plotting in their sleep"*
-
----
-**Stickers Earned:** ✨ *[Imaginary sticker of a fox pawprint]* ✨
-*(For strategic patience and elemental lore-keeping.)*
+While a first MVP should not try to include all elements at once, it should try under the hood to plan for future compatibility. 
 
 
+## Scales
+The world should be view-able on different scales:
+- Region
+- Town
+- Ediface/Dungeon
+- Room
 
+(note: some locations on a map may simply be one-room-dungeons)
 
+
+### Side Scroll (2D)
+
+### J-RPG Town (~2D)
+
+### Dungeon View (pseudo 3-D, still frames)
+
+### NxN Grid games
+- tic tac toe (3x3)
+- checkers (8x8)
+- chess (8x8)
+- igo (19x19)
+
+### Text Interface
+
+# Maybe, Maybe Not
+- CCG card-deck games (though 'avatar as card' makes sense, but seems theoretical at this time): possibly: any choice among action-options is a choice of 'cards'
+
+- visual novel (background + avatar + text): for some 'scenes' this might be a good modular form (e.g. if you walk into a room and see a conversation between two NPC's that is part of the story)
+
+
+# Strategies
+1. Make use of static 'location backgrounds' (perhaps just like physical stage-theater), on which minimal representations are functional. 
+
+2.  Make use of 'avatar-art' to supplement minimalist representations (J-RPG may be the best synthesis of this)
+ 
+3. The blending of 'hand drawn (if pixel)' art with minimal representations, as may be exemplified by the blend of subtle Yoshitaka Amano are with minimal FF games, is preferable to having one intermediate mode between the two (the worst of both worlds). 
+
+Between the 'visual novel' mode of modular background and modular avatars (e.g. a set of emotional expression avatars) and '16-bit game mode' using the avatar in box on a lower-resolution character/object representation (as with ROM-2064), there are various ways to use higher or lower resolution aspects.
+
+
+
+# Sport & Sportsmanship
+
+
+## Chess: Not a model game
+- The junkfood psychology of chess, however revered.
+- The 'representation' problems of chess and story.
+
+Major flaws.
+1. That most games essentially never end (have no clear, clean ending) is a perpetual issue frustrating everyone yet despite being an obvious problem there is a taboo against discussing it.
+2. The amount of noise in the game is extremely high, leading to an 'additive gambling psychology' that is more gang-sport than sportsmanship. This is not negative in theory, but this leads to very toxic and pathological language and perhaps psychology from commentators and players.
+3. Two of the three phases of a game are essentially broken-designs that do not work.
+- The first 20-40 moves of a game are to be pre-memorized.
+- The end-game is entirely broken, with most games being a draw or a pedantic very lengthy few-pieces end-game. 
+4. The number of kludge-rules and house-rules options are problematic, where even at a top level people cannot figure out what the game-state is: e.g. if an exact board configuration has or has not repeated three times before or after fifty moves having passed with no taken piece or a move of a pawn... etc. Even double-pawn starts and 'en passent' are an arbitrary confusion.
+5. The overall enduring culture of the sport, with rare exception, is highly similar to the most toxic internet gaming culture: petty, vindictive, toxic, anti-social, completely lacking in humanity or sportsmanship, both nihilistic and somehow greedy to believe sport-gambling-magic power-fantacies. Chess has become a personification for the utterly pointless waste of using time and energy to passionately fantasize about hurting other people for no reason and to no productive end.
+6. The game has no point or coherence: Why are we trying to 'take the king'? What is the point? 
+
+
+On the other hand there is the 'romanticized chess' of Charles Dodson, The Bladerunner Film, Harry Potter, and early AI academic literature, (to name a scant few) where Chess is seen as embodying a renaissance (interdisciplinary) integration of the humanities, STEM and other areas of broader world engagement. 
+
+
+# iGo
+
+While this is speculative, and possibly a tangent out of scope, iGo type frameworks (e.g. iGo plus optional distance, plus optional CA-rules, etc.) may represent a viable strategy to allow for world-interactions and world-models within a maintainable computation-cost and interface-cost.
+
+### About iGo
+IGo is arguably a kind of game-theory model for equilibria in a system without cost for transportation.
+In other words, if you have two 'gradients' and no relative expense for distance, with the only explicit factor being sequence (and where the implicit limiting factor is skill), what are the patterns and outcomes trends for a final distribution of gradient-presence in the problem-space of the game-board (19x19 units), where a gradient-defined space is surrounded but not ruined itself? 
+By looking at some examples this may seem strange, because many things are physical-space-cost defined, and time-allocation often is entwined with physical location. 
+
+This presents a modeling puzzle, where is the 'axis' of time on a go-board? Is it the board itself, or the board over time? What does the board represent? 
+
+The clearest examples may be hybrid environments that usually did not exist on a large scale until later in time: tele-communications.
+
+
+The distance of a phone-call does not matter, only the sequence matters.
+
+A classic example of this may be the outcome of two teams of election-campaigners or sales-teams making calls to a geographically distributed set of households, where there is social-commonality effect between the households: you do not have to sell your product directly to everyone, you just need to manage the boundaries of borders that can shift.
+
+
+## Cellular Automata, Distance, and the Howart's Legacy Static-Map Problem
+
+While the connection between a 19x19 iGo board and real life cases such as election jerrymandering maps, pizza-shop and coffee shop locations and distributions, investment and stock behaviors (also time-sequence, not space-distance-length, defined), or epidemiology patterns, or predator-prey population distributions, are a bit abstract, the overall point is that real life stories can be coherently connected to something like an iGo formal system or game.
+
+The rules of iGo are what they are, and they are fascinatingly simple and minimal, but to apply an iGo-like system to a game there is no need to only use the single mode of classic iGo.
+
+The rules of iGo are:
+1. Any surrounded 'terretory' (or set of connected nodes) that does not have at least two open, un-ruined, spaces, gets removed.
+2. You can't kill yourself (known as the 'japanese rule' or 'japanese variant of go,' which I have heard much of the world now uses)
+
+
+As a note on the 'surrounding' and 'surrounded' nature of territory, I think this entirely makes 'situational' sense using any number of real world analogies:
+
+Examples:
+1. A Proper Tea Cup
+The point of a tea-cup (or a coffee-mug) is use the least practical amount of 'wall' to 'contain' the desired amount of tea-space (which you might of as: as much of the given size as possible: if you have a 10cm by 10cm range of space (however shaped) to deal with, you want as much of that to be tea as you can. Contrarywise, there are two alternate bad outcomes. A. Your walls are too thick, and the cup is durable but only holes a thimble of tea (or worst-case, no tea at all, just a solid block that can't hold anything), or B. the wall is too thin and it (especially) breaks and spills. 
+
+Between two tea-cup producers, if one tea-cup maker can't strike the right balance in wall-thickness their products won't work. (A kind of fractal-go scenario)
+
+2. The boorish example: 
+Imagine there are two groups of soldiers, officers, knights, whathaveyou, who are trying to each contain two villages. Two extreme way that they can fail follow the same mode as: walls to thick or walls too thin. If they replace everyone in the whole village with another knight or officer, then there isn't anyone left in the village to contain: the village was lost. on the 'too thin side,' one officer can't possibly defend an entire region, and that undefended area will lost due to the other extreme. 
+
+3. Administrative support for classrooms:
+Two basic ways for administration of a school to fail also follow the 'walls too thick' or 'walls too thin' sets of problems. If you fail in the 'too thick' direction and the school replaces every teacher with a secretary and every room with an administrative office, then the school has no capacity to operate at all. On the other extreme, if you put a bunch of people in a parking lot and say: 'Go ahead, you are teachers now, go do that.' but there are no students, subjects to teach, walls, classrooms, materials, schedules, or resources of any kind, then that isn't going to work either.
+
+Also note that the iGo 'neighbor-rules in time' scenario has much in common with the 'cellular-automata' domain of STEM (somehow part of computer science, systems-theory, game-theory, information-theory, etc., but also mostly a niche abstract domain). Since Von Neuman, much has been studied about cellular automata. 
+
+
+### iGo-type Scenarios 
+The idea is that something like an iGo (perhaps with added distance-costs and other cellular automata (CA) rules) may be a story-compatible way of solving the 'Hogwarts-Legacy static map' problem. 
+
+It is important to have a workable mechanism for having the actions and choices of a player impact events in the 'world-space' of a 'game.'
+
+'Sandbox' type worlds including Minecraft, Hogwarts Legacy, and later ElderScrolls games (and probably many others, perhaps inherently in platforms such as 'unreal engine'), are often non-dynamic settings that focus on extreme detail in areas such as:
+1. individual object interactions (picking something up)
+2. photo-realistic 3D visual space
+3. combat-simulation
+
+(e.g. minecraft focuses on interacting with every block, whereas Unreal focuses on combat and visual modeling).
+
+But neither allows (well) for a population or city-sim type development or degradation of the landscape. 
+
+The idea is to be able to, for the purposes of a story, have a game-compatible set of player-actions and computations that do not involve the super-computers needed to do climate or biological population modeling. 
+
+
+## The Space Armada iGo Example
+
+Another analogy that may be helpful to see a real-world analogy for the very abstract space of iGo (some intersecting lines, two types of nodes, and two rules) is the Space-Armada iGo Analogy: imagining a scenario where two 'nations' with 'space ships' are vying for zones of territorial influence and have sufficient technology to make distance a non-issue. 
+
+If any 'nation' can send ("beam," "warp," "worm-hole," "star-gate," etc.) any ship anywhere, how does that play out in terms of territory? What matters is where you send resources, not the relative logistical cost of getting something there: not a race to plant a symbolic flag.
+
+Layers on Layers of Tactics and Strategy:
+This minimalist removal of transportation costs certainly makes iGo unlike the many cases where logistics are either significant in the problem space or effectively define most or all of the problem space. But it is interesting to separate logistical and edge-case tactics from overall deeper strategy. In the short term, tactical details can "win" something. But there is often a strategic level (or more than one) even where tactics are short term decisive. 
+
+In iGo-space, long term dynamics are emphasized and short term tactical details are ignored entirely (could one ship occasionally fend off ten others? yes, but in iGo (rightly or wrongly) this is ignored as a marginal edge case).
+ 
+IGo is not a space of noise and incidental advantage. There are no dice-rolls or random card picks; iGo is an administrative competence game.
+
+And in some cases removing spatial distance might be more realistic in the long term. Perhaps as with the market-analogy, (in the long term) any nation or company can open an office or send a ship anywhere. The question is: Do they have the skills to make that work in that location in the long term?
+
+Igo is about shaping and maintaining spaces defined by local configurations and neighbor-rules (as with cellular-automata, and perhaps cultural/linguistic-proximity). 
+
+
+## Adding Space and more 'roles' to iGo
+
+While the scope and rules of iGo are fascinatingly minimal and abstract (two rules, real world situations with distances abstracted away, etc.) for overall world-game design there is no requirement to only use this most minimal form of an igo-space.
+
+Specifically, spatial-distance and other roles-&-rules can easily be added.
+For example, you can only place an abstract-role-piece within N (say, 5 spaces from an existing space (or, from an 'eye,' ~an in-tact space in your territory). This combines the idea of giving more 'neighbor rules' to configurations of pieces with the specific goals of adding a cost for distance.
+
+For us the puzzle is how to maintain an emphasis on story, art, and process, supported by a game-framework, without a collapse of the enterprise into decontextualized battle tactics (devoid of story) or completely abstract "level" progress (in the absence of any meaning or implication of "level").
+
+As with the sport vs. sportsmanship problems with chess and other digital-computer games, there is a strong tendency for players to be attracted into getting stuck in bad-equilibria of short term super-signal thrill seeking that leads away from the interconnected worlds of stories, art, literatures, culture, language, meaning, and into the nihilistic vacuum of blind-addiction, cosersive-violence, and unconscious destruction. 
+
+The tendency for people to become addicted to gambling, joining gangs, joining cults, senseless substance abuse, antisocial behavior, etc., is a gauntlet of design obstacles. These are obstacles to survival that if not avoided will destroy the game-world and art-story curation, not 'try everything' 'culturally-relative' neutralities to casually put into a game for the fire-works fun of seeing 'viral' pathological behaviors for the sake of doing so.
+
+The mindless nihilistic firehose of disinformation will endlessly tell you that all stories and worlds are meaningless violence addictions (and also that everything including meaningless violent addictions are equally sustainable family friendly options that everyone should try). It takes dedication and skill to navigate the pitfalls in the landscape of language and meaning.
+
+
+
+# The LitRPG-Novels Paradox:
+
+It is strange that there are story-based novels that are set in, or about, games that themselves conspicuously lack meaningful stories. In the case of Matt Dinniman, the stories are most popular as physical books that are more popular than any of the referenced video-games (thirty years after books were supposed to have been entirely replaced by video-games). And in the case of Dinniman, the stories clearly criticize the anti-social 'story-less' 'meaning-less' nature of games and gaming culture.
+
+I remember that in the time period from 1996-2026, there was a genuine question of how 'Science-Fiction' the future would be. It was genuinely unknown if there would be newspapers, books, cities, jobs, computers, schools, governments, money, etc. It seemed likely, more than remotely possible, that everything about life would be replaced or significantly altered in a VR-Mobile blending of digital and physical world. But by 2026, at least the first 'push' into "digital-transformation" was a failure that mostly resulted in a large mess made for traditional forms to recover and clean up; and that it was a 'push' by people with half-baked plans rather than an inevitable evolution (to a more-stable equilibrium). 
+
+Arguably, novels such as Dungeon Crawler Carl and perhaps the Witcher fantasy novels, not echos of Tron and Ready-Player-One, both of which were popular (or cult-classic popular) but were more about 'fans of the technology' rather than being traditional romantic humanistic novels.
+
+This seemingly indicates that there is a fundamental story-literary part of language and society that is NOT being adequately interfaced with by digital-media.
+
+In phase one, we were told that digital media would include culture and the arts: e.g. From Marshall McLuhan to the early days of the journal Wired.
+
+In phase two, digital media failed to include culture arts and language.
+
+In phase three, traditional human arts of songs and story telling reflect on a failed daliance with digital media. 
+
+One key question is whether digital-media are inherently incapable of including literature and the arts, or it was a combination of problems:
+
+1. Bad engineering (various software failures and horrendous design failures)
+
+2. Insufficient hardware and software development
+
+3. A general lack of education and social capacity for education: in theory nothing is stopping chimpanzees, bonobos, dolphins, and octopi from using the internet for their societies, but clearly they are not doing so.
+
+4. Cost: The investment needed for a painter to paint a painting or a novelist to write a novel (or other book) was barely affordable. The term 'struggling artist' applies not only to writers such as J.K.Rowling (and perhaps most of the authors we now see as indispensable contributors to mind and language) but also to retrospectively revered historians such as William L. Shirer who faced the same situation while writing 'The Rise and Fall of the Third Reich,' he was essentially starving to death to get the book researched and written while being trolled by every publisher that no one wanted to read his stupid book, not to mention other scientists and researchers who often work in obscurity. This kind of retroactive-interest cannot support the significant software development that would be needed to make a truly deep interactive digital novel.
+
+#### Moving in the Other Direction
+The Witcher Game and The Witcher Novels & "Films"
+
+Fortnight (American Arena Battle Game) -> Arcane (French Film Series)
+
+
+# The Unspoken Challenge of Table-Top Gaming for 'Video' (or 'TV') Games
+
+Table top games, either typified by or most popularly associated with the classic Dungeons & Dragons game, where a single book-sized box contained everything a small group of people needed to make and act out their own story. Parts of the original 'table top' gaming world included:
+- oral story telling
+- dice roles
+- tables of data
+- 'character-sheet' dashboards of data reporting
+- visual artwork 
+- and game-mechanics rules
+
+
+
+One important question is: was this a novel-like story of characters with all the inclusions of literature and the arts, or was this a battle-simulator or context-free number generator that contained no story per se? My understanding is that devolving into uneducated violence (on various levels) has been a persistent problem for tabletop gaming.
+
+The simple-elegance of original D&D might fall into the John McCarthy 'Easy things are hard' category. The thrifty means of basic rules, basic guidebook, a few fun dice, and basic character-sheet, was a maintainable way for people to create worlds and stories. How difficult would it be to put those same elements into a digital form?
+
+One of the most difficult elements to replace may be the person running the game (sometimes called the dungeon-master or game-master, DM or GM), and it may not be entirely understood how this is a challenge. For example, a naive attempt at this might be 'let Brand-XYZ AI Chatbot do it,' which might cover individual 'tasks' such as 'What does this NPC say?' or 'Which monster is in the room?' but it does not at all solve the 'game state' problem, because as of 2026 generative AI are inherently state-less: you cannot solve a state problem with a stateless technology.
+
+
+## "mini-games"
+- NxN
+- FF-Battle
+- Side Scroll
+- Tower Defense
+- physics-builder
+- crafting: spellcraft, potioncraft, objectcraft
+
+
+
+## Puzzles, Stories, and Combat
+
+- skills vs. stats
+- world-puzzles
+- world-objects
+- 
+
+
+
+Q: Minimalizing a J-RPG/FF 'battle'
+and-or generalizing to other encounters
+
+...
+
+
+## Another technically tricky issue is 'multi-player'
+
+where high resolution multi-player games are
+A. combat-simulators (not the goals here at all)
+B. bloated and too compute intensive
+
+
+Whereas, it should be possible to have multiple players in a lower resolution setting where the data to be exchanged were far fewer map/object items and their state data.
+
+
+
+
+
+# Shakespeare & Co.
+
+Case Studies:
+1. Trying to turn Shakespeare plays into navigable worlds (not trivial)
+2. Monty Python vs. 'the monty python game' (not effective)
+3. X-Files vs. the X-Files game (not effective)
+4. Blade Runner, vs. The Bladerunner Game (not effective)
+5. 
+6. Stranger-Things and the Minecraft Stranger-Things Game (counter-example: as usual minecraft is an effective minimal mode)
+
+
+
+
+The dearth of story in games, and 'LitRPG' Novels
+
+
+
+# World Objects
+
+- scale
+- the 'river of numbers'
+- 
+
+................
+
+
+Grinding to Level Up
+
+Mini Games
+
+"Side-Quest" & "Monster of the Week": Why derided?
+
+...
+
+...
+
+# Discussions
+
+
+### Chess and Tabletop Gaming
+
+While I do not think that chess is a good game, and should be called out more for its various problems, Chess is often an excellent topic and example for discussion. 
+
+As an example to compare with the juxtaposition of pencil and paper tabletop gaming vs. digital computer based RPG games, chess presents an interesting minimal design and interface challenge. 
+
+Case: 
+Correspondence-Chess has for centuries or millenia been something that people have done using any technology that record moves for each person (e.g. each player has a chess board) and some way to convey what your next/last move is/was: I moved here. (There are various forms of more or less ambiguous notation in use, e.g. https://www.chess.com/terms/chess-notation) 
+
+The other day, to continue a game started during travel, a family member sent me a photo of the board, showing his last move, with the simple message: "Your move."
+
+This extremely simple, and historically ancient, gesture was a kind of anti-epiphony for me: For all of the assumed omnipotence of computers and the internet, how is the only/best way to play correspondence-chess in the super-beyond-science-fiction age of the 2020's (envisioned during the preceding century and more as being full of technology and means beyond comprehension and fantasy) a kludge the bypasses any technology at all: sketch a picture of the board and brute-force send-it.
+
+(As part of this exploration I built a few experimental chess servers (first in python, then in Rust) to explore how this could be better done.)
+
+See: https://www.chess.com/terms/chess-notation
+
+The result of which was calling into question the whole way that the internet is used.
+
+This, and the Uma project (see: T is for Task (also a work in progress), outlines yet more issues with how seemingly simple game-logistics problems are approached. 
+
+A repeating theme is that people create ever larger and growing stacks of erroneous solutions, and get so lost in the drama of those bad solutions, that perspective on persistent historical, timeless, and future real design scope becomes hopelessly obscured. The depth of this dysfunction should not be underestimated, such as where potemkin villages and overt hostility to the basic concept of pointing out issues-and-problems, and a self-destructive culture of nihilistically attacking assets and cultivating liabilities knowingly is a set of problems that a persistent in part because people are unable or unwilling to recognize and document that those problems are both possible and real. 
+
+Other notes on toxicity in chess-culture:
+1. Russian Vladimir Kramnik hounding beloved kind Danya Naradidski to death (yes, to death when Danya was still in his 20s)
+2. Chess as a tool in war against Europe and Good-Governance https://www.youtube.com/watch?v=0WXUlcca8-Y 
+Apr 27, 2026 4 years and 62-days since the full scale invasion began.
+
+
+...
+
+more fireteam elite commentary
+
+
+...
+
+
+To be clear:
+
+the entire paradigm of 
+
+putting unstable, incomprehensible, stacks of 3rd party dependencies into dockerized Kubernetes virtual servers on the public internet with js/ts web mobile app interfaces, unsustainable and unmaintainable without either agressive distruptive advertising and or rediculous subscription fees (not the tiny micro-transactions people have been asking for since the at least the 1990s, probably the 1960s) is entirely wrong. 
+
+I am sympathetic to it being wrong, in the same way that the 'churches of science' in the French Revolution of 1791 were wrong: it was early days, STEM wasn't evolved enough, it was an understandable mistake, but it was fully wrong period. 
+
+The same with internet-version-1: Even in the software world the pattern is, (As Steve Gibson has reported) "1. Built it, 2. Build it better. 3. Build it right." It should be expected to take at least three completely from scratch builds/rebuilds for a design to be expected to possibly be coherent. 
+
+Again, this is not a trolling criticism of the 
+
+
+...
+
+
+
+...
+
+The minecraft story-gap problem
+
+...
+
+Who Shakespeare Puzzles
+
+'world of shakespeare'
+choose your own adventure-shakespeare
+
+1. a big folio, but only one folio: weaknesses
+
+2. mechanics of situations: strengths
+
+stateful stories and games: "Shakespeare" and Thomas Hobbes
+
+
+
+
+...
+
+
+Modes:
+
+1. fully preset story game (pre-set interaction choices)
+2. Dynamic game world (e.g. iGo scenario modeling)
+2. semi-generated content
+3. fully automated GM story writer role
+
+Interactive modes: (still, a focus on story)
+4. multi-writer story worlds
+5. Multi-writer plus story worlds
+
+Note: completely random is technically an option but that is not considered here, e.g. a table-top game where virtually everything is randomly decided (which in the extreme replaces not only the GM but also the players)
+
+
+...
+
+mozaic of elements:
+
+"side-quests" are the 'narrative stories'
+
+
+
+
+
+
+
+...
+ROM 2064:
+- sense of place
+- subtle character relationships (non-book-novel closest)
+- 
+
+...
+
+sim-city and sid meyers civilizations:
+
+A. no story
+B. no strategic level maintainability in dynamic interplay
+
+1. abstract tactics and combat
+vs.
+2. abstract static sandbox (abstract 'levels' may fit here)
+vs.
+3. narrative story
+vs.
+4. dynamic-outcomes
+
+
+
+
+...
+Hypothetical outcome-based modular story plot:
+...
+
+
+
+
+art note about realism:
+- 
+- 
+- 
+
+...
+dishonpored, oil painting,
+'uncanny vary'
+
+not photo-realism
+
+zork:
+- inspiring imagination vs. showing
+
+
+quest for glory 4: voiced
+
+
+allan commings
+
+
+
+...
+
+Minimal Interface:
+
+Based on the excellent ROM-2064 design:
+there may be three or four options for player interaction with a 'game-object'
+1. Look at
+2. Use something in your inventory with/for/on this 'object'
+3. Pick up / Interact with this object.
+
+This can work as a pop-up choice (or choice-tree), so there is no elaborate key-shortcut system needed to be memorized. 
+
+...
+
+## Thought Experiment: The world of 'morrow-wind' but taken in a different direction, not photo-realistic combat simulator VR.
+
+What would be the pros and cons of leaning into a text, still-art, and impressionistic mode of interface, and to deliberately avoid the rabbit-hole of ever more expensive and less maintainable (and less artistically rich) hi-resolution VR 1:1 simulation. 
+
+What parts of (what parts of) the experience of playing morrow-wind would be potentially helped or hindered by going in this or that direction?
+
+
+- more options
+- possibly alternative art-styles for the stills and avatars (e.g. as a mod-able area)
+
+- 
+
+
+
+- more 'organization tools' to help manage quests
+
+
+...
+
+Probably a tangent...
+
+Project areas, definition collapse, and tractable areas for both stories and how to scaffold how a choose-you-own-adventure could become a dynamic tree.
+
+... 
+
+Basic tensions:
+
+1. an open-sandbox has no curated stories
+
+2. curated stories have no open-sandbox
+
+3. key choices should 'matter' and shape the world and future events.
+But choose-your-own-adventure trees are overly expensive and unmaintainable.
+
+How can these be integrated together?
+
+
+Bad Graphics Make Better Games, Actually
+Juniper Dev
+https://www.youtube.com/watch?v=-tNvoDw7Pq4 
+
+
+...
+
+Books in Elderscrolls (Games)
+https://www.youtube.com/watch?v=k_pvWTP2lL8 
+...
+
+
+Time Tracking Tabletop
+https://www.youtube.com/watch?v=zyl73XLJWhE&t=430s 
