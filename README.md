@@ -1266,6 +1266,65 @@ region dynamics:
 - simcity civilization
 
 
+... 
+
+The Economics of Story Publishing:
+
+- Investment
+
+innovation comes from lone authors who do all the product development and then go hat-in-hand to a publisher who is completely unable to predict the long and short term publishing value of works, inevitably turning away the best thing when trying to cynically grab for the last supposed 'smash hit' formula
+
+
+- Demand Distortion
+
+
 ...
 
+# Case Study: Disco Part 1: Feasible, accessible Game Model
 
+
+
+# Case Study: Disco Part 2: Story, Theater, Audio
+
+Even in the case of disco, there is also a story-telling element. 
+Not having been alive in the mid 1970's nor having lived in Europe, my very vague and shallowly-researched overall understanding is this:
+
+1. The film Saturday Night Fever was a good film with a relatable human story about the difficulties of working-class life in one of the truly most devastatingly depressing time periods in history (the mid 1970's) (that is not a joke or sarcastic: from 1971 a vast proportion of culture that had survived history rapidly died out for reasons that are still not clear)
+
+2. I cannot find clear non-contradictory accounts, but the film Saturday Night Fever appears to have significantly boosted the visibility and popularity of disco. 
+
+3. (Again, I am not an expert on this) In a story similar to writers working on their craft without commercial success for years, the Beegees (an Australian-British band) formed in 1958 and had an up and down career as they refined their craft over many years.
+
+4. The term "Disco" (varying by language etc.) is still in 2026 used throughout Europe as a generic term for 'dance-club' type venues.
+
+
+While admittedly an abnormal parallel to attempt to draw, there seem to be a number of curious similarities between the factors and phenomena of Disco as with games and writing and their publishing challenges. 
+
+- https://en.wikipedia.org/wiki/Saturday_Night_Fever 
+ - https://www.bbc.co.uk/programmes/articles/23hgH64c0cvLlwYjfmzcztJ/6-ways-disco-changed-the-world 
+- https://www.theguardian.com/music/2011/jun/15/saturday-night-fever 
+
+
+
+...
+
+# Game Design:
+
+
+We should at least try to draw some lessons, or illustrations, from the Disco case study (assuming there is any validity in the exercise, which is not guaranteed):
+
+1. That there is a persistent wish/belief in a cynical equation for sport entertainment
+
+2. The design of "games" (using the term very broadly here, including specific disco-experiences) is difficult.
+
+Putting one and two together, this may sufficiently describe the dysfunctional atmosphere around online RPG gaming. Publishers and investors have the psychological schema that this is a cynical drug-addiction market, you build flashing lights and lease a location where stupid people can have their flashing-light-violence addiction experience that they pay for, you collect the rent, you pay the lease, that's your business model. 
+
+Most 'users' (a term conveniently the same between illegal narcotics crimes and Agile software development workflow) do not show significant signs that they perceive themselves as existing in an 'anything goes' cynical market, to the contrary they are very picky. For example, even where there is great social enthusiasm for a game such as World of Warcraft, and where effort was made to make that into a perpetual business recipe-delivory publishing model, the cost and difficulty of high-quality-story-investment was too high and what publishers short-sightedly viewed as a perpetual cynical addiction market yet again, to the contrary, showed itself to be a more nuanced temporary phenomena of unrepeatable audience engagement.
+
+
+Meanwhile, individual artists and scholars (J.R.R.Tolkien was primarily a professor) spent their lives painstakingly creating facets of art that creatively reflect a lifetime of observation, rumination, and refining their craft, usually without any short-term economic reward or realistic expectation of such.
+
+Another example might be the rise and fall of the John W. Campbell era of Science fiction, where style-savvy editors, talented writers, and talented cover-artists for a while were able to maintain an astonishingly high quality, prolonged, and economically sustainable movement. How it was that this disintegrated is an important mystery. Somehow the writing talent, the editing talent, and the audience-demand, all drifted towards low quality garbage. 
+
+
+3. What people connect with, even games, tend to ebb and flow with biographies and the zeitgeist of time and place. 
