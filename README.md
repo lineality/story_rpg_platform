@@ -1,7 +1,9 @@
+#### story_rpg_platform
+(under construction) 
+
 A Rust Story-RPG Platform
 Learning From the History of Publishing & Games
 https://github.com/lineality/story_rpg_platform 
-(under construction) 
 
 see: https://github.com/stemnetbenchmarks/social_story_and_cookbook_puzzles 
 
@@ -1176,11 +1178,11 @@ Note: approaches to optimized graphics
 
 2026 08 08
 
-Some people are genuinely attracted to and satisfied by fireworks and simple shell-game, dice, roulette 'fooled-by-randomness' 'flashing lights and explosions' stimulation with no story, character, concepts, language, reading, art, etc.
+Some people are genuinely attracted to and satisfied by fireworks and simple shell-games, dice, roulette, 'fooled-by-randomness,' 'flashing lights and explosions,' stimulation with no story, character, concepts, language, reading, art, etc.
 
-on the other end of the spectrum there are museums, which are arguably 'static object in cases' but are usually indicative of an underlying story and of a 'craft' 
+On the other end of the spectrum there are museums, which are arguably 'static objects in cases' but are usually indicative of an underlying story and of a 'craft.' 
 
-to not underestimate the depth in a single 'painting'
+To not underestimate the depth in a single 'painting'
 - LP slip-cover art
 - Paperback book cover art (which in the case of science fiction in the erra of John W. Cambell (which arguably is 'Science Fiction' proper, book-stories and characters not-uncommonly were secondary homages to cover-art).
 
@@ -1195,3 +1197,75 @@ There are some games that do not aspire to be anything more than fire-works and 
 
 
 - castelvania: poster-art
+
+...
+
+Underestimating the difficulty or over-estimating the maturity of a medium:
+
+There were a number of cases, such as the X-file game, perhaps the Blade-Runner game, where an attempt was made to use a 'video game' as a medium for an interactive story, where the producer was proficient in some other form of story-telling. The fact that none of these cases came remotely close to anything of significant depth and value makes it difficult to identify which cases were not really serious attempts (being instead naked money-grabbing vapor-wear) and which were serious attempts.
+
+There has been (to pick a somewhat arbitrary time frame) between 1975 and 2025 an increasing profusion of games, ranging from board games to computer games, etc. There have also been (while the market is marginal and challenging) a significant number of table-top role playing games. 
+
+Another possible angle is RPG-Maker, which might be an example of a story-mode starting to come together, and yet the output is likewise strangely stultified. 
+
+Overall in the interplay between game and story appears to have been characterized by there not being a clean combination of story and game, rather there are stories that are primarily stories but have game-like decorations in the story, and on the other side there are games that have story-like decorations in the game. In other words there are stories that feature games, such as Stranger Things season one. And there are games that include superficial story-like elements (as in (e.g. quests in) massively multi-user games). But the stubborn gap between interactivity and choice on the side of games, and curated artist-created narrative story and character development on the the side of stories, persists.
+
+In-person table-top RPG is probably still the closest thing that there is to a synthesis of art, story, and game, yet this has a potentially critical part in the context of this study: most people are not a proficient (or professional) writer, artist, actor, musician, or story-teller (let alone all of the above). Aside from the technical difficulties of dramatizing open player choices, the art that most people create is simply terrible (with the significant caveat that this is primarily describing America, whereas comparatively speaking the average Japanese elementary or middle school student is more artistically proficient than an the most elite american professionals (perhaps an echo of the perpetual curse of the roman republic and empire (a kind of running joke at the time) that it was doomed to be hopelessly uncultured and artless no matter how wealthy (or violent) it became). 
+
+Along these lines, an interesting example of an exception to this pattern
+https://www.sffchronicles.com/threads/589335/, is how (as far I understand) the novels, and then Drama-Series 'The Expanse', was originally a tabletop RPG "campaign" (a game-story written by the players) which was then written out as novels. In this example we see at least two things. 1. When capable artists play a table-top RPG the artistic quality of the 'game world' can be significantly good. 2. These were Europeans, not Americans. 
+
+As far as I know it is not common for the quality of a game-campaign to be notably high in the sense that it could be turned into an enduring work of literature or drama, yet there is probably some microcosm of the overall discussion here within the question of how adept players themselves need to be. Arguably, with the right training and guidance, more or less all people can be good enough at world building to be part of a rewardingly rich tabletop RPG. And this may be part of the brilliant elegance of the recipe of the original ~D&D (or whatever the original name is said to have been), that it allowed more or less any player to channel their sufficient talent into a team-created work of interactive art, and arguably a mode that accommodated the affirmative charm of "amature art" not being brittle through undue exclusivity. This may be similar to the argument that a national education can educate a population. At various times and places education is more or less popular and successful. The default is that educated people, and institutions of education, are attacked and destroyed by violent criminals (for a variety of reasons, amongst which are (in the short term) fun and profit (in the long term self-destruction results in self-destruction)). 
+
+
+Another example of this strangely stubborn gap is the 'books' in the elder scrolls game series. Given that there is no reason (that I am aware of) for there to be any limitation on the books within the world, there is a suspicious and perplexingly stark 'wall of very low quality' or bubble of superficiality, that holds back the games and game-world. While morrowind arguably strikes a rare closer-balance where if you squint you can sometimes see points of value here and there, the experience never goes beyond the extremely superficial depth that you would expect from a two-pannel comic on the back of a toy-box. Despite the entire history of writing and story-telling on earth, the 'books' (and character-stories) in Morrowind are like what you would get if an alien species who only spent 15 minutes observing one town from orbit were to give an impression of human society: you can recognize it as a parody of society or art, but it is ridiculously shallow.
+
+While it is arguably understandable that story plus game-play plus art is a very difficult medium to create literature in, in the case of text, of books, there is no clear reason why the dialogue, story, and book writing are so uniformly shallow: they could literally have used public domain ancient poems, dramas, and mythology straight from Project Gutenberg. And compared with other games, Morrowind is considered to be 'too bookish.'
+
+The standards of games are shockingly low, which in a history of media may not have a precedent, perhaps suggesting the digital-media are not (to the chagrin of H. Marshall McLuhan and Pierre T'ard de Chardin) media through which people can create, communicate, or participate in art and worlds as they have for millenia through the myriad other media through which worlds are woven. 
+
+There have been various games here and there that have won the hearts of fans (such as FF7), but the shallowness of even these story-worlds compared with, for example, the once reviled John W. Campbell era of Science Fiction magazine stories, is absurd. The people who are making these games are effectively illiterate and yet we are under the duress of coercion to act as if these apathetic grunts are comparable to the language of basic literacy.
+
+Going back to the story-line of 'Dispatch,' in the world of gaming this is 'a staggering achievement', but if you wrote out the story line (including the utterly incoherent last two parts) on a napkin it would not get a passing grade as an elementary school assignment.
+
+If the story is true, Steve Jobs had an epiphany while in a class on brush-caligraphy about what a 'digital' medium and interface needed to be like (for it to empower human expression). If the goal is for the expressiveness and depth of historical calligraphy to be reached using 'high tech media' then in 2026 we have made no progress at all whatsoever towards that goal. Illuminated manuscripts and calligraphy are so far beyond any digital features. Typography, as in the 'First Folio' that is "Shakespeare," represents something that can be somewhat expressed and managed, though it is not clear that this is being done correctly or adequately. 
+
+
+Between high definition and low definition, it is not clear that what we call high definition is really an option, whereas a pointelist and ascii-minimal medium appears to be what is possible to 'paint with,' yet the results so far of what people are producing with digital pointelism and ascii are distressing.
+
+This is not confined to "games." Look at what has happened to the profession of journalism from the age of printed newspapers to the age of 'digital media.' The expectation and the ambition, like with Steve Job's McLuhan-Caligraphy-Global-Village-Noosphere vision, is that electronic media would at the very least allow more marginal flexibility and production, but what has happened is that the entire profession of journalism, over the fifty years from the Dartmouth time-sharing internet of 1966, to the public internet and app-ecosystems of 2026, has, after more than five hundred years of international development, been most terminated, with an apparent future direction of total extinction.
+
+This is a mystery. What is behind these patterns?
+Is the problem the medium itself? Or is the problem a set of other factors. For example, Americans in the 2020's are being so bombarded with blip-vert torrents of flashing-lights and explosions that they are not able to function properly. This may be more of an epidemiology and hygiene problem than a media-limitation problem. 
+
+
+
+
+...
+
+'graduate/promote' model game:
+(youth: school graduation, adult: career promotion)
+
+
+integrating underlying metrics
+
+clear story outcomes coherently based on metrics
+
+
+mystery-underworld crime-puzzle (xfiles, sherlock holmes, Father brown, etc)
+high fantasy (hogwarts)
+space pilots (starman Jones)
+frontier-mountainaer-sea ()
+
+etc.
+
+
+
+
+region dynamics:
+- simcity civilization
+
+
+...
+
+
